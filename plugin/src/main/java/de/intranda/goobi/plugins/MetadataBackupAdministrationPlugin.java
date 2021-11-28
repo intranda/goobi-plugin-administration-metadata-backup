@@ -94,10 +94,21 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
                     r.setId(process.getId());
                     // create a copy of the current meta.xml file and save it with a timestamp at the end
                     try {
-                        Path currentMetaFile = Paths.get(process.getMetadataFilePath());
+                        // get a timestamp for suffix
                         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                        
+                        // meta.xml
+                        Path currentMetaFile = Paths.get(process.getMetadataFilePath());
                         Path backupMetaFile = Paths.get(process.getMetadataFilePath() + "-" + sdf.format(timestamp));
                         StorageProvider.getInstance().copyFile(currentMetaFile, backupMetaFile);
+
+                        // meta_anchor.xml
+                        String anchor = process.getMetadataFilePath().replace("meta.xml", "meta_anchor.xml");
+                        Path currentMetaAnchorFile = Paths.get(anchor);
+                        if (StorageProvider.getInstance().isFileExists(currentMetaAnchorFile)) {
+                            Path backupMetaAnchorFile = Paths.get(anchor + "-" + sdf.format(timestamp));
+                            StorageProvider.getInstance().copyFile(currentMetaAnchorFile, backupMetaAnchorFile);
+                        }
                     } catch (Exception e) {
                         r.setStatus("ERROR");
                         r.setMessage(e.getMessage());

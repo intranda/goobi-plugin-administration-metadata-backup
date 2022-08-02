@@ -29,7 +29,7 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin, IPushPlugin {
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
-    
+
     @Getter
     private String title = "intranda_administration_metadata_backup";
 
@@ -50,10 +50,10 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
     private String filter;
 
     @Getter
-    private List<MetadataBackupResult> resultsLimited = new ArrayList<MetadataBackupResult>();
-    private List<MetadataBackupResult> results = new ArrayList<MetadataBackupResult>();
+    private List<MetadataBackupResult> resultsLimited = new ArrayList<>();
+    private List<MetadataBackupResult> results = new ArrayList<>();
     private PushContext pusher;
-    
+
     /**
      * Constructor
      */
@@ -61,7 +61,7 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
         log.info("Metadata backup administration plugin started");
         filter = ConfigPlugins.getPluginConfig(title).getString("filter", "");
     }
-    
+
     /**
      * action method to run through all processes matching the filter
      */
@@ -70,15 +70,15 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
 
         // filter the list of all processes that should be affected
         String query = FilterHelper.criteriaBuilder(filter, false, null, null, null, true, false);
-        List<Integer> tempProcesses = ProcessManager.getIDList( query);
+        List<Integer> tempProcesses = ProcessManager.getIdsForFilter( query);
 
         resultTotal = tempProcesses.size();
         resultProcessed = 0;
-        results = new ArrayList<MetadataBackupResult>();
-        resultsLimited = new ArrayList<MetadataBackupResult>();
+        results = new ArrayList<>();
+        resultsLimited = new ArrayList<>();
 
 
-        
+
         Runnable runnable = () -> {
             try {
                 long lastPush = System.currentTimeMillis();
@@ -96,7 +96,7 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
                     try {
                         // get a timestamp for suffix
                         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                        
+
                         // meta.xml
                         Path currentMetaFile = Paths.get(process.getMetadataFilePath());
                         Path backupMetaFile = Paths.get(process.getMetadataFilePath() + "-" + sdf.format(timestamp));
@@ -187,5 +187,5 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
         return "/uii/plugin_administration_metadata_backup.xhtml";
     }
 
-    
+
 }

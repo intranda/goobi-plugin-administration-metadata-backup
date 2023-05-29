@@ -33,7 +33,8 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
     @Getter
     private String title = "intranda_administration_metadata_backup";
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private int limit = 10;
 
     @Getter
@@ -70,14 +71,12 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
 
         // filter the list of all processes that should be affected
         String query = FilterHelper.criteriaBuilder(filter, false, null, null, null, true, false);
-        List<Integer> tempProcesses = ProcessManager.getIdsForFilter( query);
+        List<Integer> tempProcesses = ProcessManager.getIdsForFilter(query);
 
         resultTotal = tempProcesses.size();
         resultProcessed = 0;
         results = new ArrayList<>();
         resultsLimited = new ArrayList<>();
-
-
 
         Runnable runnable = () -> {
             try {
@@ -85,7 +84,7 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
                 for (Integer processId : tempProcesses) {
                     Process process = ProcessManager.getProcessById(processId);
 
-                    //                  Thread.sleep(1000);
+                    // Thread.sleep(1000);
                     if (!run) {
                         break;
                     }
@@ -114,7 +113,7 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
                         r.setMessage(e.getMessage());
                     }
                     results.add(0, r);
-                    if (results.size()>limit) {
+                    if (results.size() > limit) {
                         resultsLimited = new ArrayList<>(results.subList(0, limit));
                     } else {
                         resultsLimited = new ArrayList<>(results);
@@ -144,15 +143,15 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
      * @return
      */
     public String showInProcessList(String limit) {
-        String search = "\"id:";
+        StringBuilder search = new StringBuilder("\"id:");
         for (MetadataBackupResult r : results) {
             if (limit.isEmpty() || limit.equals(r.getStatus())) {
-                search += r.getId() + " ";
+                search.append(r.getId()).append(" ");
             }
         }
-        search += "\"";
+        search.append("\"");
         ProcessBean processBean = Helper.getBeanByClass(ProcessBean.class);
-        processBean.setFilter( search);
+        processBean.setFilter(search.toString());
         processBean.setModusAnzeige("aktuell");
         return processBean.FilterAlleStart();
     }
@@ -169,6 +168,7 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
 
     /**
      * get the progress in percent to render a progress bar
+     *
      * @return progress as percentage
      */
     public int getProgress() {
@@ -186,6 +186,5 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
     public String getGui() {
         return "/uii/plugin_administration_metadata_backup.xhtml";
     }
-
 
 }

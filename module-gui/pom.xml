@@ -2,10 +2,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.goobi.workflow.plugin</groupId>
-    <artifactId>plugin-administration-metadata_backup</artifactId>
+    <artifactId>plugin-administration-metadata-backup</artifactId>
     <version>24.03-SNAPSHOT</version>
   </parent>
-  <artifactId>plugin-administration-metadata_backup-gui</artifactId>
+  <artifactId>plugin-administration-metadata-backup-gui</artifactId>
   <packaging>jar</packaging>
   <build>
     <resources>

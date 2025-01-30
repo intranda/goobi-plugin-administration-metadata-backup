@@ -28,6 +28,8 @@ import net.xeoh.plugins.base.annotations.PluginImplementation;
 @Log4j2
 public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin, IPushPlugin {
 
+    private static final long serialVersionUID = 6984163285203180060L;
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HHmmssSSS");
 
     @Getter
@@ -51,8 +53,8 @@ public class MetadataBackupAdministrationPlugin implements IAdministrationPlugin
     private String filter;
 
     @Getter
-    private List<MetadataBackupResult> resultsLimited = new ArrayList<>();
-    private List<MetadataBackupResult> results = new ArrayList<>();
+    private transient List<MetadataBackupResult> resultsLimited = new ArrayList<>();
+    private transient List<MetadataBackupResult> results = new ArrayList<>();
     private PushContext pusher;
 
     /**

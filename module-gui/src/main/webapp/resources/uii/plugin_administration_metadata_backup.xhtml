@@ -4,7 +4,7 @@
     xmlns:h="http://xmlns.jcp.org/jsf/html"
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:o="http://omnifaces.org/ui"
-    xmlns:intranda="http://xmlns.jcp.org/jsf/composite/compositesPG"
+    xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:p="http://primefaces.org/ui" xmlns:jsf="http://xmlns.jcp.org/jsf">
 
@@ -33,7 +33,7 @@
                 boxForm="true"
                 icon="fa-plug"
                 title="#{msgs[AdministrationForm.administrationPlugin.title]}">
-                
+
                 <h:form id="filterForm">
 
                     <!-- Filter -->
@@ -42,16 +42,16 @@
                         field="#{AdministrationForm.administrationPlugin.filter}"
                         help="#{msgs.helpFilter}" fieldStyle="form-control"
                         required="false" />
-    
+
                     <!-- Execute the plugin -->
                     <div class="form-actions">
-                        <button jsf:id="cancel" class="btn btn-blank" 
+                        <button jsf:id="cancel" class="btn btn-blank"
                             jsf:action="#{AdministrationForm.administrationPlugin.cancel}"
                             jsf:rendered="#{AdministrationForm.administrationPlugin.run}">
                             <h:outputText value="#{msgs.abbrechen}" />
                         </button>
-                    
-                        <button class="btn btn-primary submitOnEnter pull-right font-size-s margin-bottom-most" 
+
+                        <button class="btn btn-primary submitOnEnter pull-right font-size-s margin-bottom-most"
                             jsf:id="filterButton"
                             type="submit" jsf:action="#{AdministrationForm.administrationPlugin.execute}">
                             <h:outputText value="#{msgs.executePlugin}" />
@@ -60,15 +60,15 @@
                 </h:form>
             </intranda:box>
             <!-- // filter area -->
-            
-            
+
+
             <h:panelGroup id="resultArea" rendered="#{AdministrationForm.administrationPlugin.resultTotal gt 0}">
                 <intranda:box
                     boxType="neutral"
                     boxPadding="true"
                     icon="fa-table"
                     title="#{msgs.ergebnisse}">
-                    
+
                     <h:form>
                         <div class="row">
                             <div class="col-2">
@@ -247,8 +247,8 @@
                             <!-- // LIMIT HITS -->
                         </div>
                     </h:form>
-                    
-                    
+
+
                     <!-- FORM -->
                     <h:form
                         id="myform"
@@ -372,7 +372,7 @@
                     <!-- // FORM -->
                 </intranda:box>
             </h:panelGroup>
-            
+
         </ui:fragment>
 
         <!-- websocket communication -->

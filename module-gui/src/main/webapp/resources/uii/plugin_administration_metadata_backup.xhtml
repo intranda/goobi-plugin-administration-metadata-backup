@@ -6,7 +6,8 @@
     xmlns:o="http://omnifaces.org/ui"
     xmlns:intranda="http://xmlns.jcp.org/jsf/composite/composites"
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-    xmlns:p="http://primefaces.org/ui" xmlns:jsf="http://xmlns.jcp.org/jsf">
+    xmlns:p="http://primefaces.org/ui" xmlns:jsf="http://xmlns.jcp.org/jsf"
+    xmlns:util="http://goobi.io/util">
 
     <composite:interface>
     </composite:interface>
@@ -31,7 +32,7 @@
                 boxPadding="false"
                 boxClass="mb-3"
                 boxForm="true"
-                icon="fa-plug"
+                icon="plug"
                 title="#{msgs[AdministrationForm.administrationPlugin.title]}">
 
                 <h:form id="filterForm">
@@ -66,7 +67,7 @@
                 <intranda:box
                     boxType="neutral"
                     boxPadding="true"
-                    icon="fa-table"
+                    icon="table"
                     title="#{msgs.ergebnisse}">
 
                     <h:form>
@@ -90,7 +91,7 @@
                                                 data-bs-toggle="dropdown"
                                                 aria-haspopup="true"
                                                 aria-expanded="false">
-                                                <i class="fa fa-filter" />
+                                                <util:icon icon="filter" />
                                                 <span class="caret"></span>
                                             </button>
 
@@ -176,7 +177,7 @@
                                             data-bs-toggle="dropdown"
                                             aria-haspopup="true"
                                             aria-expanded="false">
-                                            <i class="fa fa-table" />
+                                            <util:icon icon="table" />
                                             <span class="caret"></span>
                                         </button>
 
@@ -317,7 +318,7 @@
                                                     title="#{msgs.metadatenBearbeiten}"
                                                     pt:aria-label="#{msgs.metadatenBearbeiten}"
                                                     onclick="preventDoubleSubmit(this); sessionStorage.removeItem('columnWidths');">
-                                                    <i class="fa fa-book " />
+                                                    <util:icon icon="book" />
                                                     <f:passThroughAttribute
                                                         name="data-toggle"
                                                         value="tooltip" />

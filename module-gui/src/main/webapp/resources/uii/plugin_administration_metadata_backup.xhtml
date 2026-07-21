@@ -20,10 +20,7 @@
             }
         </style>
 
-        <h:outputText
-            rendered="#{!LoginForm.hasRole('Plugin_administration_metadata_backup')}"
-            styleClass="alert alert-danger d-block"
-            value="#{msgs.plugin_administration_missingPermission} Plugin_administration_metadata_backup"/>
+        <util:missing-rights rights="Plugin_administration_metadata_backup" rendered="true" />
 
         <ui:fragment rendered="#{LoginForm.hasRole('Plugin_administration_metadata_backup')}">
             <!-- filter area -->
